@@ -15,6 +15,8 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AppointmentSerializer(serializers.ModelSerializer):
+    doctor = serializers.StringRelatedField()
+    patient = serializers.StringRelatedField()
     class Meta:
         model = Appointment
         fields = '__all__'

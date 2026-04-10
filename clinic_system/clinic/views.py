@@ -77,7 +77,7 @@ def patient_detail(request, pk):
         return Response({"message": "deleted"})
 
 @api_view(['GET', 'POST'])
-def appointment_list(request, pk):
+def appointment_list(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
         serializer = AppointmentSerializer(appointments, many=True)

@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path,include
 from django.shortcuts import redirect
 
-def home(request):
-    return redirect('/admin/')
+
+
 urlpatterns = [
+    path('', include('frontend.urls')),
     path('admin/', admin.site.urls),
-    path('', home),
+
     path('',include('clinic.urls')),
 ]
 
