@@ -48,6 +48,7 @@
 <a href="http://127.0.0.1:8000/doctors/" target="_blank">doctors list site</a>
 <a href="http://127.0.0.1:8000/patients/" target="_blank">patients list site</a>
 <script>
+    const token = localStorage.getItem("token");
     // Doctors
    fetch("http://127.0.0.1:8000/doctors/")
    .then(response => response.json())
