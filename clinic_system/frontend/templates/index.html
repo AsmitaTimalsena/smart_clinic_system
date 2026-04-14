@@ -47,27 +47,28 @@
 <a href="http://127.0.0.1:8000/admin/" target="_blank">admin site</a>
 <a href="http://127.0.0.1:8000/doctors/" target="_blank">doctors list site</a>
 <a href="http://127.0.0.1:8000/patients/" target="_blank">patients list site</a>
+<a href="http://127.0.0.1:8000/register/" >Register</a>
+<a href="http://127.0.0.1:8000/login/">Login</a>
 <script>
     const token = localStorage.getItem("token");
-    // Doctors
-   fetch("http://127.0.0.1:8000/doctors/")
-   .then(response => response.json())
-   .then(data => {
-       const table = document.getElementById('doctor_list');
+    fetch("http://127.0.0.1:8000/doctors/",{
+    method :"GET",
+    header:{"Authorization":"Bearer "+token}
+    })
+    .then(response => response.json())
+    .then(data=>{
+        const list = document.getElementById('doctors_list');
+        data.forEach(doctor => {
+            const li = document.createElement('li');
+            li.innerText = doctor.name;
+            list.appendChild(li);
 
-       data.forEach(doctor => {
-           const row = document.createElement('tr');
 
-           row.innerHTML = `
-               <td>${doctor.name}</td>
-               <td>${doctor.specialization}</td>
-               <td>${doctor.experience}</td>
-           `;
+        });
+    }).catch(error => console.errors("error is :", error));
 
-           table.appendChild(row);
-       });
-   })
-   .catch(error => console.error("doctor error:", error));
+
+
 
    // Patients
    fetch("http://127.0.0.1:8000/patients/")
@@ -81,7 +82,7 @@
            row.innerHTML = `
                <td>${patient.name}</td>
                <td>${patient.age}</td>
-           `;
+           `;0
 
            table.appendChild(row);
        });

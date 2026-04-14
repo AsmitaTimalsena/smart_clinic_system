@@ -1,4 +1,5 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Doctor, Patient, Appointment
@@ -6,6 +7,7 @@ from .serializers import DoctorSerializer, PatientSerializer, AppointmentSeriali
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def doctor_list(request):
     if request.method == "GET":
         doctors = Doctor.objects.all()
@@ -22,6 +24,7 @@ def doctor_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def doctor_detail(request, pk):
    try:
       doctor = Doctor.objects.get(pk=pk)
@@ -41,6 +44,7 @@ def doctor_detail(request, pk):
       return Response({"message": "deleted"})
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def patient_list(request):
     if request.method == "GET":
         patients = Patient.objects.all()
@@ -55,6 +59,7 @@ def patient_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def patient_detail(request, pk):
     try:
         patient = Patient.objects.get(pk=pk)
@@ -77,6 +82,7 @@ def patient_detail(request, pk):
         return Response({"message": "deleted"})
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def appointment_list(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
@@ -91,6 +97,7 @@ def appointment_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def appointment_detail(request, pk):
     try:
         appointment = Appointment.objects.get(pk=pk)
