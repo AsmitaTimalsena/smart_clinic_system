@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('',include('clinic.urls')),
-    path('api/auth/',include('accounts.urls')),
+    path('api/',include('accounts.urls')),
     #for token
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
