@@ -39,6 +39,13 @@ def profile(request):
         'role': request.user.role,
     })
 
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def users_list(request):
+#     users = User.objects.all().values('id', 'username', 'role')
+#     return Response(list(users))
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def users_list(request):
